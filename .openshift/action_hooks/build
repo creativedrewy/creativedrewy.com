@@ -1,1 +1,3 @@
-echo "::: Compiling source for live website :::"
+echo "::: Preparing source for live website :::"
+typings install
+grunt ts

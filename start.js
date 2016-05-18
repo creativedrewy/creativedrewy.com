@@ -41,6 +41,5 @@ if (cluster.isMaster) {
     });
   }
 } else {
-  //TODO: Put in official site js file here
-  //require('');
+  require('app/bin/site.js');
 }

@@ -1,4 +1,5 @@
 echo "::: Preparing source for live website :::"
+cd /var/lib/openshift/573c907c0c1e6699de00009d/app-root/runtime/repo/
 export HOME=/var/lib/openshift/573c907c0c1e6699de00009d/app-root/runtime/repo/
 typings install
 grunt ts

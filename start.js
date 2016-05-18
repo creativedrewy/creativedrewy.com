@@ -1,3 +1,8 @@
+/**
+ * Code from Custom Node.js cartridge for OpenShift
+ * https://github.com/icflorescu/openshift-cartridge-nodejs
+ * License: https://github.com/icflorescu/openshift-cartridge-nodejs/blob/master/LICENSE
+ */
 const cluster = require('cluster'),
       stopSignals = [
         'SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
@@ -36,5 +41,6 @@ if (cluster.isMaster) {
     });
   }
 } else {
-  require('./app.js');
+  //TODO: Put in official site js file here
+  //require('');
 }

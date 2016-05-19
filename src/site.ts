@@ -9,10 +9,9 @@ import * as http from 'http';
 
 const debug = debugModule('express:server');
 
-/**
- * Get port from environment and store in Express.
- */
-const port = normalizePort(process.env.NODE_PORT || 3000);
+const port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+const serverIpAddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+
 app.set('port', port);
 
 /**
@@ -23,22 +22,9 @@ var server = http.createServer(app);
 /**
  * Listen on provided port,on all network interfaces.
  */
-server.listen(port);
+server.listen(port, serverIpAddress);
 server.on('error', onError);
 server.on('listening', onListening);
-
-/**
- * Normalize a port into a number,string,or false.
- */
-function normalizePort(val: any): number|string|boolean {
-  let port = parseInt(val, 10);
-  
-  if (isNaN(port)) { return val; }
-  
-  if (port >= 0) { return port; }
-  
-  return false;
-}
 
 /**
  * Event listener for HTTP server "error" event.

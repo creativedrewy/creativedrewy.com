@@ -1,13 +1,24 @@
 module.exports = function (grunt) {
     grunt.initConfig({
+        express: {
+            dev: {
+                options: {
+                    script: "app/bin/site.js"
+                }
+            }
+        },
         watch: {
-            files: ['**/*'],
-            tasks: ['ts'],
+            files: ['**/*.ts'],
+            tasks: ['ts', 'express:dev'],
             options: {
+                spawn: false,
                 livereload: true
             }
         },
         ts: {
+            options: {
+                fast: 'never',
+            },
             default: {
                 tsconfig: true
             }
@@ -16,5 +27,6 @@ module.exports = function (grunt) {
     
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks("grunt-ts");
-    grunt.registerTask("default", ["ts", "watch"]);
+    grunt.loadNpmTasks('grunt-express-server');
+    grunt.registerTask("default", ["ts", "express:dev", "watch"]);
 };

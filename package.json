@@ -18,5 +18,8 @@
     "q": "^1.4.1",
     "serve-favicon": "^2.3.0",
     "typings": "^1.0.4"
+  },
+  "devDependencies": {
+    "grunt-express-server": "^0.5.3"
   }
 }

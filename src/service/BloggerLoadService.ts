@@ -5,14 +5,15 @@ env('.env');
 
 import * as https from 'https';
 import * as Q from 'q';
+import * as post from '../model/PostDetails'
 
 export class BloggerLoadService {
         
     /**
      * 
      */
-    loadBloggerData():Q.Promise<string> {        
-        return Q.Promise<string>((resolve, reject) => {
+    loadBloggerData():Q.Promise<Array<post.PostDetails>> {        
+        return Q.Promise<Array<post.PostDetails>>((resolve, reject) => {
             var blogRawData:string = "";
             
             https.get({ 
@@ -24,10 +25,30 @@ export class BloggerLoadService {
                 })
                 
                 response.on('end', () => {
-                    resolve(blogRawData);
+                    resolve(this.parsePostData(blogRawData));
                 });
             })
         });
+    }
+    
+    /**
+     * 
+     */
+    parsePostData(jsonSource: string):Array<post.PostDetails> {
+        var sourceData = JSON.parse(jsonSource);
+        var posts:Array<post.PostDetails> = new Array<post.PostDetails>();
+        
+        for (var item of sourceData.items) {
+            var details:post.PostDetails = new post.PostDetails();
+            details.title = item.title;
+            details.postDate = item.published;
+            details.linkUrl = item.url;
+            details.mainContent = item.content;
+            
+            posts.push(details);
+        }
+        
+        return posts;
     }
     
 };

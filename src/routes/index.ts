@@ -11,10 +11,14 @@ var bloggerLoader:blogger.BloggerLoadService = new blogger.BloggerLoadService();
  * Handle site root route
  */
 router.get('/', (req, res, next) => {
+  
   bloggerLoader.loadBloggerData()
-    .then((outString: string) => {
-      res.render('index', { });
+    .then((posts) => {
+      res.render('index', {
+        bloggerPosts: posts
+      });
     })
+    
 });
 
 export default router;

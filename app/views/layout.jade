@@ -2,7 +2,139 @@ doctype html
 html
   head
     meta(charset='utf-8')
+    title {creative:drewy}
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    
+    link(href='/assets/css/journal.bootstrap.css', rel='stylesheet')
+    link(href='/assets/css/bootstrap-responsive.css', rel='stylesheet')
+    link(href='/assets/css/styles.css', rel='stylesheet')
+    
+    script(type='text/javascript', src='https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert')
+    script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script(type='text/javascript', src='/assets/js/site.js')
     script(src='//localhost:35729/livereload.js')
-    title= title
   body
-    block content
+    .container
+      .row
+        .span3.main-avatar
+          img(src='http://www.gravatar.com/avatar/a1d5c5255be43478b9ac67b43a9a0853?s=270')
+        .span9.hero
+          h1 {creative:drewy}
+          p
+            script(src='/bio.js')
+          .hero-images
+            a(href='mailto:creativedrewy@gmail.com', target='_blank')
+              .social-button-container
+                .social-button-overlay
+                  p Email
+                img(src='https://lh4.googleusercontent.com/VkvTKIL-MWMO5gCw9xshtLIaj3HWQ8FszTMw_Emr=s207-p-no')
+            a(href='https://twitter.com/creativedrewy', target='_blank')
+              .social-button-container
+                .social-button-overlay
+                  p twitter
+                img(src='https://lh5.googleusercontent.com/-zjiLss13EH4/ULP0o7VaeoI/AAAAAAAAACM/EM0fg9j7LvA/s128/twitter_logo.png')
+            a(href='http://github.com/creativedrewy', target='_blank')
+              .social-button-container
+                .social-button-overlay
+                  p github
+                img(src='https://lh5.googleusercontent.com/-m3EZr_I7deY/ULP0nxemtdI/AAAAAAAAACA/p1LMJ8Tq98I/s128/github_logo.png')
+            a(href='http://pinterest.com/creativedrewy', target='_blank')
+              .social-button-container
+                .social-button-overlay
+                  p pinterest
+                img(src='https://lh5.googleusercontent.com/-FCSqp4n8S_w/ULREDN_852I/AAAAAAAAACw/1h8lCbbJOoQ/s128/pinterest_logo.png')
+            a(href='http://about.me/creativedrewy', target='_blank')
+              .social-button-container
+                .social-button-overlay
+                  p about.me
+                img(src='https://lh3.googleusercontent.com/-8z58VGYrAaI/ULP0n9_IYkI/AAAAAAAAAB4/VQ53q6giisQ/s128/aboutme_logo.png')
+      .row
+        .span8
+          h2.blog-heading From the blog:
+          h3.post-title WeaRSS Internet Coverage
+          .post-info
+            h4.published-info Posted 02/12/2015
+            a.btn.btn-info.btn-large.read-it-button(href='http://creativedrewy.blogspot.com/2015/02/wearss-internet-coverage.html', target='_blank') Read It!
+            .post-main-content
+              div
+                | WeaRSS has been getting some coverage on the internet; both on the web and in the land of Android apps. I thought I would share the love.
+                br
+                br
+                | First - and I'm most excited about this - WeaRSS is currently a featured app in the Android Wear section of the Google Play Store! I shared the photo on my 
+                a(href='http://instagram.com/creativedrewy', target='_blank') Instagram
+                |  profile:
+                br
+                br
+                table.tr-caption-container(align='center', cellpadding='0', cellspacing='0', style='margin-left: auto; margin-right: auto; text-align: center;')
+                  tbody
+                    tr
+                      td(style='text-align: center;')
+                        a(href='http://photos-a.ak.instagram.com/hphotos-ak-xaf1/t51.2885-15/10949014_1534217380178816_1103921584_n.jpg', imageanchor='1', style='margin-left: auto; margin-right: auto;')
+                          img(border='0', src='http://photos-a.ak.instagram.com/hphotos-ak-xaf1/t51.2885-15/10949014_1534217380178816_1103921584_n.jpg', height='320', width='320')
+                    tr
+                      td.tr-caption(style='text-align: center;') I never thought this would happen!
+                br
+                | To see it for yourself open up the Play Store on your Android device (and you 
+                i
+                  b do
+                |  have an Android device, right?) and head to the Android Wear page; these are "Hand-Picked for Wear" apps. Swipe down the page and you'll see it listed right there! It's definitely an honor to get recognition from Google in this fashion.
+                br
+                br
+                | WeaRSS has also been getting some video recognition on YouTube. Here is a great video review:
+                br
+                br
+                .separator(style='clear: both; text-align: center;')
+                  iframe.YOUTUBE-iframe-video(allowfullscreen='', data-thumbnail-src='https://ytimg.googleusercontent.com/vi/28ZgrZ77Low/0.jpg', frameborder='0', height='266', src='http://www.youtube.com/embed/28ZgrZ77Low?feature=player_embedded', width='320')
+                div(style='clear: both; text-align: left;')
+                  br
+                  | And YouTube channel 
+                  a(href='http://www.youtube.com/channel/UCcRlebYC40o-krbjU8cMC6A', target='_blank') HonestTech
+                  |  includes it as one of their "5 Must Have Android Wear Apps:"
+                div(style='clear: both; text-align: left;')
+                  br
+                .separator(style='clear: both; text-align: center;')
+                .separator(style='clear: both; text-align: center;')
+                  iframe.YOUTUBE-iframe-video(allowfullscreen='', data-thumbnail-src='https://ytimg.googleusercontent.com/vi/3sDHmWVhsHA/0.jpg', frameborder='0', height='266', src='http://www.youtube.com/embed/3sDHmWVhsHA?feature=player_embedded', width='320')
+                div(style='clear: both; text-align: center;')
+                  br
+                div(style='clear: both; text-align: left;')
+                  | A big thanks to the creators of those videos for the coverage. And while you're watching the videos, why don't you give those channels a like or subscribe?
+                div(style='clear: both; text-align: left;')
+                  br
+                  | The app has been picked up by a couple of websites too:
+                  br
+                  ul
+                    li
+                      a(href='http://www.androidwearapps.org/2014/11/wearss-rss-feed-for-android-wear-watch.html#.VN1glC6RUZz', target='_blank') Best Android Wear Apps
+                      |  posted an article about it highlighting its features.
+                    li
+                      | Over on 
+                      a(href='http://makeuseof.com/', target='_blank') makeuseof.com
+                      | , author Ben Stegner included it in his "
+                      a(href='http://www.makeuseof.com/tag/6-awesome-apps-android-wear-smartwatch/', target='_blank') 6 More Awesome Apps For Your Android Wear Smartwatch
+                      | " list.
+                div(style='clear: both; text-align: left;')
+                  br
+                  | On a final note, I realize it's not entirely clear how to actually pronounce 'WeaRSS' when you say it out loud. I'll try to lay the confusion to rest: the way I say it is "wear-R-ess-ess;" kind of in a flowing manner. I do pronounce both 'Wear' and 'RSS' but I mash them together a little bit with an extra "R" sound to bridge the two parts together.
+                div(style='clear: both; text-align: left;')
+                  br
+                div(style='clear: both; text-align: left;')
+                  | Naturally, this should help you as you discuss this app with your friends and/or make a positive video review. Right? Right.
+                div(style='clear: both; text-align: left;')
+                  br
+              p.post-footer
+                | Read the original and comment over on 
+                a(target='_blank', href='http://creativedrewy.blogspot.com/2015/02/wearss-internet-coverage.html') blogger.
+                
+        .span4
+          h2.blog-heading Tumblr is for linking:
+          .tumblr-link
+            h4 ASP MVC and the Dreaded "..operation could not be completed" Error
+            a(href='http://blog.nerdery.com/2014/01/asp-mvc-dreaded-operation-completed-error/', target='_blank') http://blog.nerdery.com/2014/01/asp-mvc-dreaded-operation-completed-error/
+            .tumblr-description
+              p
+                | A blog post I wrote about a very unhelpful error I was seeing in Visual Studio with an ASP MVC web project. The solution was not what I would have expected…
+          
+      .row
+        .span12.footer
+          p © {creative:drewy} 2016

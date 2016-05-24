@@ -6,3 +6,4 @@ node_modules/*
 typings/*
 bower_components/*
 app/bin/*
+.env

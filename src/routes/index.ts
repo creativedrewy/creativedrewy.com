@@ -26,4 +26,8 @@ router.get('/bio.js', (req, res, next) => {
   res.send("document.write('Principal Android and Interactive developer in Austin, TX. If it\\'s a cool project, I probably want to work on it.');");
 })
 
+//TODO: Routes to handle:
+//@get '/highlight/:id':
+//@get '/downloads/:file':
+
 export default router;

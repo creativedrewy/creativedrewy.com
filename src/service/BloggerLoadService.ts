@@ -1,5 +1,8 @@
 'use strict'
 
+var env = require('node-env-file');
+env('.env');
+
 import * as Q from 'q'; 
 
 export class BloggerLoadService {

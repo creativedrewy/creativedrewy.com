@@ -1,0 +1,177 @@
+
+body {
+    background: url("/assets/img/background.png") repeat scroll 0 0 transparent;
+}
+
+h4 {
+    font-size: 21px;
+}
+
+.main-avatar,
+.hero {
+    margin-top: 65px;
+}
+
+.main-avatar {
+    text-align: center;
+    margin-right: -4px;
+}
+
+.hero {
+    float: left;
+    font-size: 16px;
+    border: 2px solid #aaaaaa;
+    border-radius: 8px;
+    /* background-color: #dddddd; rgba(0, 0, 0, 0.05) */
+    min-height: 270px;
+}
+
+.hero h1, .hero p {
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+.hero h1 {
+    font-size: 52px;
+    color: #444444;
+}
+
+.hero-images a {
+    float: left;
+    margin-top: 15px;
+    margin-left: 35px;
+    margin-bottom: 15px;
+}
+
+.social-button-container,
+.social-button-overlay {
+    width: 128px;
+    height: 128px;
+}
+
+.social-button-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.social-button-overlay {
+    position: absolute;
+    color: #FFFFFF;
+    background-color: #dfdedc;
+    background-color: rgba(209, 67, 67, 0.8);
+    top: 128px;
+}
+
+.social-button-overlay p {
+    position: absolute;
+    margin: 0;
+    width: 100%;
+    top: 42%;
+    text-align: center;
+}
+
+.blog-heading {
+    margin-top: 65px;
+    border-bottom: 4px solid #dfdedc;
+    color: #d14343;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+h3, h4 {
+    color: #444444;
+}
+
+.published-info {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.post-info {
+    overflow: hidden;
+    margin-bottom: 45px;
+}
+
+.post-main-content {
+    color: #555;
+    background-color: #fff;
+    display: none;
+}
+
+.tr-caption-container {
+    margin-bottom: 12px;
+}
+
+.post-main-content h3 {
+    font-size: 23px;
+    margin-top: 5px;
+}
+
+.post-main-content ul, .post-main-content ol {
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.post-footer {
+    padding-top: 3px;
+    border-top: 1px solid #999999;
+}
+
+.btn-info {
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+.tumblr-link {
+    margin-bottom: 25px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.tumblr-link a {
+    color: rgb(80, 115, 172);
+}
+
+.tumblr-description {
+    margin-top: 5px;
+}
+
+.tumblr-description blockquote {
+    background-color: #dddddd;
+    border-left: 5px solid #bbbbbb;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+
+.tumblr-description blockquote p {
+    font-size: inherit;
+    color: inherit;
+}
+
+.tumblr-description p {
+    color: #444444;
+}
+
+.footer {
+    margin-top: 45px;
+    margin-bottom: 40px;
+    border-top: 4px solid #dfdedc;
+    padding-top: 5px;
+    color: #444444;
+}
+
+@media (max-width: 400px)
+{
+    .hero h1 {
+        font-size: 40px;
+    }
+    
+    .hero-images a {
+        width: 100%;
+        margin-left: 0px;
+    }
+    
+    .social-button-container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

@@ -2,10 +2,12 @@
 
 import * as express from 'express';
 import {BloggerLoadService} from '../service/BloggerLoadService';
+import {TumblrLoadService} from '../service/TumblrLoadService';
 
 const router = express.Router();
 
 var bloggerLoader:BloggerLoadService = new BloggerLoadService();
+var tumblrLoader: TumblrLoadService = new TumblrLoadService();
 
 /**
  * Handle site root

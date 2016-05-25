@@ -1,11 +1,11 @@
 'use strict';
 
 import * as express from 'express';
-import * as blogger from '../service/BloggerLoadService';
+import {BloggerLoadService} from '../service/BloggerLoadService';
 
 const router = express.Router();
 
-var bloggerLoader:blogger.BloggerLoadService = new blogger.BloggerLoadService();
+var bloggerLoader:BloggerLoadService = new BloggerLoadService();
 
 /**
  * Handle site root

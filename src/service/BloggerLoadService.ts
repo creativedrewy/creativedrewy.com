@@ -5,15 +5,16 @@ env('.env');
 
 import * as https from 'https';
 import * as Q from 'q';
-import * as post from '../model/PostDetails'
+import * as Rx from 'rx';   //http://stackoverflow.com/questions/35919693/typescript-cannot-find-name-ipromise-in-rxjs-definition
+import {PostDetails} from '../model/PostDetails';
 
 export class BloggerLoadService {
         
     /**
      * 
      */
-    loadBloggerData():Q.Promise<Array<post.PostDetails>> {        
-        return Q.Promise<Array<post.PostDetails>>((resolve, reject) => {
+    loadBloggerData():Q.Promise<Array<PostDetails>> {
+        return Q.Promise<Array<PostDetails>>((resolve, reject) => {
             var blogRawData:string = "";
             
             https.get({ 
@@ -34,12 +35,12 @@ export class BloggerLoadService {
     /**
      * 
      */
-    parsePostData(jsonSource: string):Array<post.PostDetails> {
+    parsePostData(jsonSource: string):Array<PostDetails> {
         var sourceData = JSON.parse(jsonSource);
-        var posts:Array<post.PostDetails> = new Array<post.PostDetails>();
+        var posts:Array<PostDetails> = new Array<PostDetails>();
         
         for (var item of sourceData.items) {
-            var details:post.PostDetails = new post.PostDetails();
+            var details:PostDetails = new PostDetails();
             details.title = item.title;
             details.postDate = item.published;
             details.linkUrl = item.url;

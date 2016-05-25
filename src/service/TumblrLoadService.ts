@@ -6,7 +6,7 @@ env('.env');
 var tumblr = require('tumblr.js');
 var tumblrClient;
 
-import {Observable} from 'rx';   //http://stackoverflow.com/questions/35919693/typescript-cannot-find-name-ipromise-in-rxjs-definition
+import {Observable} from 'rx';
 import {PostDetails} from '../model/PostDetails';
 
 export class TumblrLoadService {
@@ -29,7 +29,7 @@ export class TumblrLoadService {
     loadTumblrData():Observable<Array<PostDetails>> {
         return Observable.create<Array<PostDetails>>((observer) => {
             tumblrClient.blogPosts('creativedrewy', (err, data) => {
-                observer.onNext(this.parsePostData(data.posts));
+                observer.onNext(this.parsePostData(data));
             });
         });
     }

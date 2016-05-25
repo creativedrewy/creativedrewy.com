@@ -1,6 +1,7 @@
 'use strict';
 
 import * as express from 'express';
+import {Observable} from 'rx';
 import {BloggerLoadService} from '../service/BloggerLoadService';
 import {TumblrLoadService} from '../service/TumblrLoadService';
 
@@ -13,12 +14,19 @@ var tumblrLoader: TumblrLoadService = new TumblrLoadService();
  * Handle site root
  */
 router.get('/', (req, res, next) => {
-  bloggerLoader.loadBloggerData()
-    .subscribe((posts) => {
+  Observable.zip(bloggerLoader.loadBloggerData(), tumblrLoader.loadTumblrData(), 
+    (bloggerPosts, tumblrPosts) => {
+      return {
+        blogger: bloggerPosts,
+        tumblr: tumblrPosts
+      };
+    })
+    .subscribe((result) => {
       res.render('index', {
-        bloggerPosts: posts
+        bloggerPosts: result.blogger,
+        tumbrlPosts: result.tumblr
       });
-    });
+    })
 });
 
 /**

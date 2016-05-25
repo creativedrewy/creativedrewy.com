@@ -19,9 +19,11 @@ block content
             
     .span4
       h2.blog-heading Tumblr is for linking:
-      .tumblr-link
-        h4 ASP MVC and the Dreaded "..operation could not be completed" Error
-        a(href='http://blog.nerdery.com/2014/01/asp-mvc-dreaded-operation-completed-error/', target='_blank') http://blog.nerdery.com/2014/01/asp-mvc-dreaded-operation-completed-error/
-        .tumblr-description
-          p
-            | A blog post I wrote about a very unhelpful error I was seeing in Visual Studio with an ASP MVC web project. The solution was not what I would have expected…
+      
+      each post in tumbrlPosts
+        .tumblr-link
+          h4= post.title
+          a(href='http://blog.nerdery.com/2014/01/asp-mvc-dreaded-operation-completed-error/', target='_blank') http://blog.nerdery.com/2014/01/asp-mvc-dreaded-operation-completed-error/
+          .tumblr-description
+            p
+              | A blog post I wrote about a very unhelpful error I was seeing in Visual Studio with an ASP MVC web project. The solution was not what I would have expected…

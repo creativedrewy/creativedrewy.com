@@ -10,7 +10,6 @@
     "mime": "registry:dt/mime#0.0.0+20160316155526",
     "morgan": "registry:dt/morgan#1.2.2+20160317120654",
     "node": "registry:dt/node#6.0.0+20160523035754",
-    "q": "registry:dt/q#0.0.0+20160417152954",
     "rx": "npm:rx/ts/rx.all.d.ts",
     "serve-favicon": "registry:dt/serve-favicon#0.0.0+20160316155526",
     "serve-static": "registry:dt/serve-static#0.0.0+20160501131543"

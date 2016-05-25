@@ -12,11 +12,11 @@ var bloggerLoader:BloggerLoadService = new BloggerLoadService();
  */
 router.get('/', (req, res, next) => {
   bloggerLoader.loadBloggerData()
-    .then((posts) => {
+    .subscribe((posts) => {
       res.render('index', {
         bloggerPosts: posts
       });
-    })
+    });
 });
 
 /**

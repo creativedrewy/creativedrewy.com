@@ -4,17 +4,16 @@ var env = require('node-env-file');
 env('.env');
 
 import * as https from 'https';
-import * as Q from 'q';
-import * as Rx from 'rx';   //http://stackoverflow.com/questions/35919693/typescript-cannot-find-name-ipromise-in-rxjs-definition
+import {Observable} from 'rx';   //http://stackoverflow.com/questions/35919693/typescript-cannot-find-name-ipromise-in-rxjs-definition
 import {PostDetails} from '../model/PostDetails';
 
 export class BloggerLoadService {
         
     /**
-     * 
+     * Load the blogger data as an rx operation
      */
-    loadBloggerData():Q.Promise<Array<PostDetails>> {
-        return Q.Promise<Array<PostDetails>>((resolve, reject) => {
+    loadBloggerData():Observable<Array<PostDetails>> {
+        return Observable.create<Array<PostDetails>>((observer) => {
             var blogRawData:string = "";
             
             https.get({ 
@@ -26,14 +25,14 @@ export class BloggerLoadService {
                 })
                 
                 response.on('end', () => {
-                    resolve(this.parsePostData(blogRawData));
+                    observer.onNext(this.parsePostData(blogRawData));
                 });
             })
         });
     }
     
     /**
-     * 
+     * Convert the data that comes back from blogger to the objects used in the layout
      */
     parsePostData(jsonSource: string):Array<PostDetails> {
         var sourceData = JSON.parse(jsonSource);

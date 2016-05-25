@@ -9,34 +9,13 @@ block content
         h3.post-title= post.title
         .post-info
           h4.published-info= post.postDate
-          a.btn.btn-info.btn-large.read-it-button(href='http://creativedrewy.blogspot.com/2015/02/wearss-internet-coverage.html', target='_blank') Read It!
+          a.btn.btn-info.btn-large.read-it-button(href=post.linkUrl, target='_blank') Read It!
           .post-main-content
-            div
-              //- | WeaRSS has been getting some coverage on the internet; both on the web and in the land of Android apps. I thought I would share the love.
-              //- br
-              //- br
-              //- | First - and I'm most excited about this - WeaRSS is currently a featured app in the Android Wear section of the Google Play Store! I shared the photo on my 
-              //- a(href='http://instagram.com/creativedrewy', target='_blank') Instagram
-              //- |  profile:
-              //- br
-              //- br
-              //- table.tr-caption-container(align='center', cellpadding='0', cellspacing='0', style='margin-left: auto; margin-right: auto; text-align: center;')
-              //-   tbody
-              //-     tr
-              //-       td(style='text-align: center;')
-              //-         a(href='http://photos-a.ak.instagram.com/hphotos-ak-xaf1/t51.2885-15/10949014_1534217380178816_1103921584_n.jpg', imageanchor='1', style='margin-left: auto; margin-right: auto;')
-              //-           img(border='0', src='http://photos-a.ak.instagram.com/hphotos-ak-xaf1/t51.2885-15/10949014_1534217380178816_1103921584_n.jpg', height='320', width='320')
-              //-     tr
-              //-       td.tr-caption(style='text-align: center;') I never thought this would happen!
-              //- br
-              //- | To see it for yourself open up the Play Store on your Android device (and you 
-              //- i
-              //-   b do
-              //- |  have an Android device, right?) and head to the Android Wear page; these are "Hand-Picked for Wear" apps. Swipe down the page and you'll see it listed right there! It's definitely an honor to get recognition from Google in this fashion.
-              
+            div !{post.mainContent}
+            
             p.post-footer
               | Read the original and comment over on 
-              a(target='_blank', href='http://creativedrewy.blogspot.com/2015/02/wearss-internet-coverage.html') blogger.
+              a(target='_blank', href=post.linkUrl) blogger.
             
     .span4
       h2.blog-heading Tumblr is for linking:

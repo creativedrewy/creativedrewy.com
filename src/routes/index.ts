@@ -14,7 +14,7 @@ var tumblrLoader: TumblrLoadService = new TumblrLoadService();
  * Handle site root
  */
 router.get('/', (req, res, next) => {
-  Observable.zip(bloggerLoader.loadBloggerData(), tumblrLoader.loadTumblrData(), 
+  Observable.zip(bloggerLoader.loadBloggerData(), tumblrLoader.loadTumblrData(),
     (bloggerPosts, tumblrPosts) => {
       return {
         blogger: bloggerPosts,

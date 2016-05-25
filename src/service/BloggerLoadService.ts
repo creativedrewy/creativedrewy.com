@@ -7,6 +7,9 @@ import * as https from 'https';
 import {Observable} from 'rx';   //http://stackoverflow.com/questions/35919693/typescript-cannot-find-name-ipromise-in-rxjs-definition
 import {PostDetails} from '../model/PostDetails';
 
+/**
+ * Encapsulates functionality with the Blogger API
+ */
 export class BloggerLoadService {
         
     /**

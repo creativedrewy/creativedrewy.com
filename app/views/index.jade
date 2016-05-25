@@ -23,7 +23,6 @@ block content
       each post in tumbrlPosts
         .tumblr-link
           h4= post.title
-          a(href='http://blog.nerdery.com/2014/01/asp-mvc-dreaded-operation-completed-error/', target='_blank') http://blog.nerdery.com/2014/01/asp-mvc-dreaded-operation-completed-error/
+          a(href=post.linkUrl, target='_blank')= post.linkUrl
           .tumblr-description
-            p
-              | A blog post I wrote about a very unhelpful error I was seeing in Visual Studio with an ASP MVC web project. The solution was not what I would have expected…
+            p !{post.mainContent}

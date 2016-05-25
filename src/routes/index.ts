@@ -8,7 +8,7 @@ import {TumblrLoadService} from '../service/TumblrLoadService';
 const router = express.Router();
 
 var bloggerLoader:BloggerLoadService = new BloggerLoadService();
-var tumblrLoader: TumblrLoadService = new TumblrLoadService();
+var tumblrLoader:TumblrLoadService = new TumblrLoadService();
 
 /**
  * Handle site root

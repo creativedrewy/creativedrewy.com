@@ -6,6 +6,7 @@ env('.env');
 import * as https from 'https';
 import {Observable} from 'rx';   //http://stackoverflow.com/questions/35919693/typescript-cannot-find-name-ipromise-in-rxjs-definition
 import {PostDetails} from '../model/PostDetails';
+import {DateUtil} from '../util/DateUtil';
 
 /**
  * Encapsulates functionality with the Blogger API
@@ -44,7 +45,7 @@ export class BloggerLoadService {
         for (var item of sourceData.items) {
             var details:PostDetails = new PostDetails();
             details.title = item.title;
-            details.postDate = item.published;
+            details.postDate = DateUtil.bloggerDateReadable(item.published);
             details.linkUrl = item.url;
             details.mainContent = item.content;
             

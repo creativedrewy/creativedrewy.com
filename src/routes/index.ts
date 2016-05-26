@@ -38,7 +38,10 @@ router.get('/bio.js', (req, res, next) => {
 })
 
 router.get('/highlight/:id', (req, res, next) => {
-  //fs.readFileSync("", "UTF-8")
+  var index = parseInt(req.params['id']);
+  var highlightSource:string = fs.readFileSync("highlights.json", "UTF-8");
+  
+  console.log("Your highlight: " + index);
   res.send('highlight');
 })
 

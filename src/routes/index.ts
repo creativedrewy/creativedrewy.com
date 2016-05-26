@@ -1,5 +1,6 @@
 'use strict';
 
+import * as fs from 'fs';
 import * as express from 'express';
 import {Observable} from 'rx';
 import {BloggerLoadService} from '../service/BloggerLoadService';
@@ -30,13 +31,14 @@ router.get('/', (req, res, next) => {
 });
 
 /**
- * "Dynamic" bio js that can be embedded elsewhere
+ * "Dynamic" bio js that can be embedded externally
  */
 router.get('/bio.js', (req, res, next) => {
   res.send("document.write('Principal Android and Interactive developer in Austin, TX. If it\\'s a cool project, I probably want to work on it.');");
 })
 
 router.get('/highlight/:id', (req, res, next) => {
+  //fs.readFileSync("", "UTF-8")
   res.send('highlight');
 })
 

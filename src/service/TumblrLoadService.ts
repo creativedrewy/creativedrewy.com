@@ -1,7 +1,7 @@
 'use strict'
 
 var env = require('node-env-file');
-env('.env');
+env('.auth');
 
 var tumblr = require('tumblr.js');
 var tumblrClient;

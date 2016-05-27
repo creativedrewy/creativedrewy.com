@@ -1,7 +1,7 @@
 'use strict'
 
 var env = require('node-env-file');
-env('.env');
+env('.auth');
 
 import * as https from 'https';
 import {Observable} from 'rx';   //http://stackoverflow.com/questions/35919693/typescript-cannot-find-name-ipromise-in-rxjs-definition

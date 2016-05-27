@@ -7,3 +7,4 @@ typings/*
 bower_components/*
 app/bin/*
 .env
+.auth

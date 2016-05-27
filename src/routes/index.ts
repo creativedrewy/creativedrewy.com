@@ -37,13 +37,19 @@ router.get('/bio.js', (req, res, next) => {
   res.send("document.write('Principal Android and Interactive developer in Austin, TX. If it\\'s a cool project, I probably want to work on it.');");
 })
 
+/**
+ * Kind of like a URL shortener, but running from my website
+ */
 router.get('/highlight/:id', (req, res, next) => {
   var index = parseInt(req.params['id']);
   var highlightSource:string = fs.readFileSync("highlights.json", "UTF-8");
-  
   var highlightData = JSON.parse(highlightSource);
   
-  res.redirect(highlightData.urls[index]);
+  if (index <= highlightData.urls.length) {
+    res.redirect(highlightData.urls[index - 1]);
+  } else {
+    res.redirect("/");
+  }
 })
 
 export default router;

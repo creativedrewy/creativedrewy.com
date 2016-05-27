@@ -43,7 +43,7 @@ router.get('/highlight/:id', (req, res, next) => {
   
   var highlightData = JSON.parse(highlightSource);
   
-  res.send('highlight ' + highlightData.urls[index]);
+  res.redirect(highlightData.urls[index]);
 })
 
 export default router;

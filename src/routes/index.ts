@@ -41,8 +41,9 @@ router.get('/highlight/:id', (req, res, next) => {
   var index = parseInt(req.params['id']);
   var highlightSource:string = fs.readFileSync("highlights.json", "UTF-8");
   
-  console.log("Your highlight: " + index);
-  res.send('highlight');
+  var highlightData = JSON.parse(highlightSource);
+  
+  res.send('highlight ' + highlightData.urls[index]);
 })
 
 export default router;

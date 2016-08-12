@@ -4,7 +4,9 @@ var env = require('node-env-file');
 env('.auth');
 
 var GitHubApi = require("github");
+var gitHubClient;
 
+import * as https from 'https';
 import {Observable} from 'rx';
 import {PostDetails} from '../model/PostDetails';
 
@@ -13,21 +15,37 @@ import {PostDetails} from '../model/PostDetails';
  */
 export class GitHubLoadService {
 
-    doSomeStuff() {
-        var github = new GitHubApi({ });
-
-        github.authenticate({
+    constructor() {
+        gitHubClient = new GitHubApi({});
+        gitHubClient.authenticate({
             type: "oauth",
             token: process.env.GITHUB_TOKEN
-        })
+        });
+    }
 
-        var gists = github.gists.getAll({}, (err, res) => {
+    doSomeStuff() {
+        var gists = gitHubClient.gists.getAll({}, (err, res) => {
             for (var gist of res) {
                 if (gist.description.startsWith("Quick")) {
-                    console.log(gist)
+                    
                 }
             }
-        })
+        });
+    }
+
+    downloadUrl(host: string, dirPath: string) {
+        var urlRawData:string = "";
+            
+        https.get({ 
+            host: host,
+            path: dirPath
+        }, (response) => {
+            response.on('data', (chunk) => urlRawData += chunk)
+            
+            response.on('end', () => {
+                
+            });
+        });
     }
 
 }

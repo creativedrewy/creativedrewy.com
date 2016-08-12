@@ -5,11 +5,15 @@ import * as express from 'express';
 import {Observable} from 'rx';
 import {BloggerLoadService} from '../service/BloggerLoadService';
 import {TumblrLoadService} from '../service/TumblrLoadService';
+import {GitHubLoadService} from '../service/GitHubLoadService'
 
 const router = express.Router();
 
 var bloggerLoader:BloggerLoadService = new BloggerLoadService();
 var tumblrLoader:TumblrLoadService = new TumblrLoadService();
+var gitHubLoader:GitHubLoadService = new GitHubLoadService();
+
+gitHubLoader.doSomeStuff();
 
 /**
  * Handle site root

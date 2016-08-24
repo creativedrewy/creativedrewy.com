@@ -29,6 +29,12 @@ export class GitHubLoadService {
                     return Observable.from(listOfPosts);
                 })
                 .flatMap((post) => {
+                    console.log(">> Here is some post information: " + post.description);
+                    //post.description
+                    //post.created_at
+                    //post.files.keys[0]
+                    //post.files[<key>].raw_url
+
                     return this.downloadUrl("host", "dirPath");
                 }, (origPost, fileContents) => {
                     origPost.mainContent = fileContents;
@@ -37,17 +43,17 @@ export class GitHubLoadService {
                 .toArray();
     }
 
-    generatePostsRxList():Observable<Array<PostDetails>> {
-        return Observable.create<Array<PostDetails>>((subscriber) => {
+    generatePostsRxList():Observable<Array<any>> {
+        return Observable.create<Array<any>>((subscriber) => {
             gitHubClient.gists.getAll({}, (err, res) => {
-                var quickHitPosts = new Array<PostDetails>();
+                var quickHitPosts = new Array<any>();
 
                 for (var gist of res) {
                     if (gist.description.startsWith("Quick")) {
-                        var post = new PostDetails();
-                        post.title = "This is a test post";
+                        // var post = new PostDetails();
+                        // post.title = "This is a test post";
 
-                        quickHitPosts.push(post);
+                        quickHitPosts.push(gist);
                     }
                 }
 

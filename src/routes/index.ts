@@ -13,7 +13,13 @@ var bloggerLoader:BloggerLoadService = new BloggerLoadService();
 var tumblrLoader:TumblrLoadService = new TumblrLoadService();
 var gitHubLoader:GitHubLoadService = new GitHubLoadService();
 
-gitHubLoader.doSomeStuff();
+gitHubLoader.loadQuickHitPosts()
+          .subscribe(collection => {
+
+          }, 
+          err => {
+            
+          })
 
 /**
  * Handle site root

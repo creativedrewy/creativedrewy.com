@@ -68,21 +68,19 @@ export class GitHubLoadService {
 
     downloadUrl(host: string, dirPath: string):Observable<string> {
         return Observable.create<string>((subscriber) => { 
-            subscriber.onNext(">> Here is what you gave me: " + host + " " + dirPath);
-        });
-
-        // var urlRawData:string = "";
+            var urlRawData:string = "";
             
-        // https.get({ 
-        //     host: host,
-        //     path: dirPath
-        // }, (response) => {
-        //     response.on('data', (chunk) => urlRawData += chunk)
-            
-        //     response.on('end', () => {
+            https.get({ 
+                host: host,
+                path: dirPath
+            }, (response) => {
+                response.on('data', (chunk) => urlRawData += chunk)
                 
-        //     });
-        // });
+                response.on('end', () => {
+                    subscriber.onNext(urlRawData);
+                });
+            });
+        });
     }
 
 }

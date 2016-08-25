@@ -11,13 +11,16 @@ var gitHubClient;
 import * as https from 'https';
 import {Observable} from 'rx';
 import {PostDetails} from '../model/PostDetails';
+import {RawGetDataServiceBase} from './RawGetDataServiceBase'
 
 /**
  * 
  */
-export class GitHubLoadService {
+export class GitHubLoadService extends RawGetDataServiceBase {
 
     constructor() {
+        super();
+
         gitHubClient = new GitHubApi({});
         gitHubClient.authenticate({
             type: "oauth",
@@ -62,23 +65,6 @@ export class GitHubLoadService {
                 }
 
                 subscriber.onNext(quickHitPosts);
-            });
-        });
-    }
-
-    downloadUrl(host: string, dirPath: string):Observable<string> {
-        return Observable.create<string>((subscriber) => { 
-            var urlRawData:string = "";
-            
-            https.get({ 
-                host: host,
-                path: dirPath
-            }, (response) => {
-                response.on('data', (chunk) => urlRawData += chunk)
-                
-                response.on('end', () => {
-                    subscriber.onNext(urlRawData);
-                });
             });
         });
     }

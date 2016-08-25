@@ -18,7 +18,7 @@ gitHubLoader.loadQuickHitPosts()
 
           }, 
           err => {
-            
+            console.log(err)
           })
 
 /**

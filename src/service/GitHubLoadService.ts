@@ -1,5 +1,7 @@
 'use strict'
 
+var url = require('url');
+
 var env = require('node-env-file');
 env('.auth');
 
@@ -29,14 +31,16 @@ export class GitHubLoadService {
                     return Observable.from(listOfPosts);
                 })
                 .flatMap((post) => {
-                    console.log(">> Here is some post information: " + post.description);
+                    var firstFileKey = Object.keys(post.files)[0];
+                    var fullPostFileUrl = post.files[firstFileKey]['raw_url'];
+                    var uri = url.parse(fullPostFileUrl);
+
+                    return this.downloadUrl(uri.host, uri.path);
+                }, (origPost, fileContents) => {
+                    console.log(">> Your file: " + fileContents)
                     //post.description
                     //post.created_at
-                    //post.files.keys[0]
-                    //post.files[<key>].raw_url
 
-                    return this.downloadUrl("host", "dirPath");
-                }, (origPost, fileContents) => {
                     origPost.mainContent = fileContents;
                     return origPost;
                 })
@@ -64,7 +68,7 @@ export class GitHubLoadService {
 
     downloadUrl(host: string, dirPath: string):Observable<string> {
         return Observable.create<string>((subscriber) => { 
-            subscriber.onNext("Check me out I have some contents!")
+            subscriber.onNext(">> Here is what you gave me: " + host + " " + dirPath);
         });
 
         // var urlRawData:string = "";

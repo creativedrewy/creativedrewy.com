@@ -7,32 +7,20 @@ import * as https from 'https';
 import {Observable} from 'rx';   //http://stackoverflow.com/questions/35919693/typescript-cannot-find-name-ipromise-in-rxjs-definition
 import {PostDetails} from '../model/PostDetails';
 import {DateUtil} from '../util/DateUtil';
+import {RawGetDataServiceBase} from './RawGetDataServiceBase';
 
 /**
  * Encapsulates functionality with the Blogger API
  */
-export class BloggerLoadService {
+export class BloggerLoadService extends RawGetDataServiceBase {
         
     /**
      * Load the blogger data as an rx operation
      */
     loadBloggerData():Observable<Array<PostDetails>> {
-        return Observable.create<Array<PostDetails>>((observer) => {
-            var blogRawData:string = "";
-            
-            https.get({ 
-                host: "www.googleapis.com",
-                path: "/blogger/v3/blogs/6463744994222299033/posts?key=" + process.env.BLOGGER
-            }, (response) => {
-                response.on('data', (chunk) => {
-                    blogRawData += chunk;
-                })
-                
-                response.on('end', () => {
-                    observer.onNext(this.parsePostData(blogRawData));
-                });
-            })
-        });
+        return this.downloadUrl("www.googleapis.com", 
+                                "/blogger/v3/blogs/6463744994222299033/posts?key=" + process.env.BLOGGER)
+                    .map(jsonSource => this.parsePostData(jsonSource));
     }
     
     /**

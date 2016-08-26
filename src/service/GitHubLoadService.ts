@@ -11,10 +11,10 @@ var gitHubClient;
 import * as https from 'https';
 import {Observable} from 'rx';
 import {PostDetails} from '../model/PostDetails';
-import {RawGetDataServiceBase} from './RawGetDataServiceBase'
+import {RawGetDataServiceBase} from './RawGetDataServiceBase';
 
 /**
- * 
+ * Service to load my specific GH gists and return them as the common data to display in my article list
  */
 export class GitHubLoadService extends RawGetDataServiceBase {
 
@@ -43,6 +43,7 @@ export class GitHubLoadService extends RawGetDataServiceBase {
                     console.log(">> Your file: " + fileContents)
                     //post.description
                     //post.created_at
+                    //post.html_url
 
                     origPost.mainContent = fileContents;
                     return origPost;
@@ -57,9 +58,6 @@ export class GitHubLoadService extends RawGetDataServiceBase {
 
                 for (var gist of res) {
                     if (gist.description.startsWith("Quick")) {
-                        // var post = new PostDetails();
-                        // post.title = "This is a test post";
-
                         quickHitPosts.push(gist);
                     }
                 }

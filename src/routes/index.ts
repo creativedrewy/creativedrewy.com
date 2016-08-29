@@ -14,12 +14,19 @@ var tumblrLoader:TumblrLoadService = new TumblrLoadService();
 var gitHubLoader:GitHubLoadService = new GitHubLoadService();
 
 gitHubLoader.loadQuickHitPosts()
-          .subscribe(collection => {
+          .subscribe(item  => {
+            console.log(">> I am a post! ")
 
+            // collection.forEach(item => {
+            //   console.log(item.title);
+            // })
           }, 
           err => {
             console.log(err)
-          })
+          },
+          () => {
+            console.log(">> You're done")
+          });
 
 /**
  * Handle site root

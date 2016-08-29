@@ -45,8 +45,10 @@ export class GitHubLoadService extends RawGetDataServiceBase {
                     //post.created_at
                     //post.html_url
 
+                    var details = new PostDetails();
                     origPost.mainContent = fileContents;
-                    return origPost;
+                    
+                    return details;
                 })
                 .toArray();
     }
@@ -63,6 +65,7 @@ export class GitHubLoadService extends RawGetDataServiceBase {
                 }
 
                 subscriber.onNext(quickHitPosts);
+                subscriber.onCompleted();
             });
         });
     }

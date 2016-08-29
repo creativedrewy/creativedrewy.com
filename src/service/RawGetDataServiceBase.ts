@@ -23,6 +23,7 @@ export class RawGetDataServiceBase {
                 
                 response.on('end', () => {
                     subscriber.onNext(urlRawData);
+                    subscriber.onCompleted();
                 });
             });
         });

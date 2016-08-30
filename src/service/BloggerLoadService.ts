@@ -33,7 +33,7 @@ export class BloggerLoadService extends RawGetDataServiceBase {
         for (var item of sourceData.items) {
             var details:PostDetails = new PostDetails();
             details.title = item.title;
-            details.postDate = DateUtil.bloggerDateReadable(item.published);
+            details.postDate = DateUtil.convertDateToSiteFormat(item.published);
             details.linkUrl = item.url;
             details.mainContent = item.content;
             

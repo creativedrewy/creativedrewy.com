@@ -14,18 +14,13 @@ var tumblrLoader:TumblrLoadService = new TumblrLoadService();
 var gitHubLoader:GitHubLoadService = new GitHubLoadService();
 
 gitHubLoader.loadQuickHitPosts()
-          .subscribe(item  => {
-            console.log(">> I am a post! ")
-
-            // collection.forEach(item => {
-            //   console.log(item.title);
-            // })
+          .subscribe(collection  => {
+            collection.forEach(item => {
+              console.log(item.mainContent);
+            })
           }, 
           err => {
             console.log(err)
-          },
-          () => {
-            console.log(">> You're done")
           });
 
 /**

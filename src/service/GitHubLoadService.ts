@@ -12,6 +12,7 @@ import * as https from 'https';
 import {Observable} from 'rx';
 import {PostDetails} from '../model/PostDetails';
 import {RawGetDataServiceBase} from './RawGetDataServiceBase';
+import {DateUtil} from '../util/DateUtil';
 
 /**
  * Service to load my specific GH gists and return them as the common data to display in my article list
@@ -40,15 +41,13 @@ export class GitHubLoadService extends RawGetDataServiceBase {
 
                     return this.downloadUrl(uri.host, uri.path);
                 }, (origPost, fileContents) => {
-                    console.log(">> Your file: " + fileContents)
-                    //post.description
-                    //post.created_at
-                    //post.html_url
-
-                    var details = new PostDetails();
-                    origPost.mainContent = fileContents;
+                    var currentPost = new PostDetails();
+                    currentPost.mainContent = fileContents;
+                    currentPost.title = origPost.description;
+                    currentPost.linkUrl = origPost.html_url;
+                    currentPost.postDate = DateUtil.convertDateToSiteFormat(origPost.created_at);
                     
-                    return details;
+                    return currentPost;
                 })
                 .toArray();
     }

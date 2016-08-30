@@ -29,6 +29,9 @@ export class GitHubLoadService extends RawGetDataServiceBase {
         });
     }
 
+    /**
+     * Return my "Quick Hit" posts in the to display on my site
+     */
     loadQuickHitPosts():Observable<Array<PostDetails>> {
         return this.generatePostsRxList()
                 .flatMap((listOfPosts) => {
@@ -49,9 +52,18 @@ export class GitHubLoadService extends RawGetDataServiceBase {
                     
                     return currentPost;
                 })
+                .flatMap((partialPost) => { 
+                    return this.generatePostMarkup(partialPost.mainContent); 
+                }, (post, htmlResult) => {
+                    post.mainContent = htmlResult;
+                    return post;
+                })
                 .toArray();
     }
 
+    /**
+     * Get my "Quick Hit" GitHub gists in the github library format via rx
+     */
     generatePostsRxList():Observable<Array<any>> {
         return Observable.create<Array<any>>((subscriber) => {
             gitHubClient.gists.getAll({}, (err, res) => {
@@ -64,6 +76,20 @@ export class GitHubLoadService extends RawGetDataServiceBase {
                 }
 
                 subscriber.onNext(quickHitPosts);
+                subscriber.onCompleted();
+            });
+        });
+    }
+
+    /**
+     * Convert a post markdown source to rendered xml via rx
+     */
+    generatePostMarkup(markdownSource: string):Observable<string> {
+        return Observable.create<string>((subscriber) => {
+            gitHubClient.misc.renderMarkdown({ 
+                "text": markdownSource 
+            }, (err, result) => {
+                subscriber.onNext(result["data"]);
                 subscriber.onCompleted();
             });
         });

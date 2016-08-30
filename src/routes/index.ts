@@ -13,24 +13,16 @@ var bloggerLoader:BloggerLoadService = new BloggerLoadService();
 var tumblrLoader:TumblrLoadService = new TumblrLoadService();
 var gitHubLoader:GitHubLoadService = new GitHubLoadService();
 
-gitHubLoader.loadQuickHitPosts()
-          .subscribe(collection  => {
-            collection.forEach(item => {
-              console.log(item.mainContent);
-            })
-          }, 
-          err => {
-            console.log(err)
-          });
-
 /**
  * Handle site root
  */
 router.get('/', (req, res, next) => {
-  Observable.zip(bloggerLoader.loadBloggerData(), tumblrLoader.loadTumblrData(),
-    (bloggerPosts, tumblrPosts) => {
+  Observable.zip(gitHubLoader.loadQuickHitPosts(), 
+                 bloggerLoader.loadBloggerData(), 
+                 tumblrLoader.loadTumblrData(),
+    (githubPosts, bloggerPosts, tumblrPosts) => {
       return {
-        blogger: bloggerPosts,
+        blogger: githubPosts.concat(bloggerPosts),
         tumblr: tumblrPosts
       };
     })

@@ -56,10 +56,7 @@ export class GitHubLoadService extends RawGetDataServiceBase {
                     return post;
                 })
                 .toArray()
-                .map(items => items.sort((left, right) => {
-                    //Do the compare now
-                    return 0;
-                }));
+                .map(items => items.sort((left, right) => new Date(left.postDate) >= new Date(right.postDate) ? 0 : 1));
     }
 
     /**

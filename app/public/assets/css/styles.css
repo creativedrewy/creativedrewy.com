@@ -122,6 +122,18 @@ h3, h4 {
     margin-bottom: 20px;
 }
 
+.pl-ent {
+    color: #5100CF;
+}
+
+.pl-e {
+    color: #005FFF;
+}
+
+.pl-s {
+    color: #A31515;
+}
+
 .post-footer {
     padding-top: 3px;
     border-top: 1px solid #999999;

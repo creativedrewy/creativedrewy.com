@@ -34,10 +34,8 @@ export class GitHubLoadService extends RawGetDataServiceBase {
      */
     loadQuickHitPosts():Observable<Array<PostDetails>> {
         return this.generatePostsRxList()
-                .flatMap((listOfPosts) => {
-                    return Observable.from(listOfPosts);
-                })
-                .flatMap((post) => {
+                .flatMap(listOfPosts => Observable.from(listOfPosts))
+                .flatMap(post => {
                     var firstFileKey = Object.keys(post.files)[0];
                     var fullPostFileUrl = post.files[firstFileKey]['raw_url'];
                     var uri = url.parse(fullPostFileUrl);
@@ -52,13 +50,16 @@ export class GitHubLoadService extends RawGetDataServiceBase {
                     
                     return currentPost;
                 })
-                .flatMap((partialPost) => { 
-                    return this.generatePostMarkup(partialPost.mainContent); 
-                }, (post, htmlResult) => {
+                .flatMap(partialPost => this.generatePostMarkup(partialPost.mainContent),  
+                (post, htmlResult) => {
                     post.mainContent = htmlResult;
                     return post;
                 })
-                .toArray();
+                .toArray()
+                .map(items => items.sort((left, right) => {
+                    //Do the compare now
+                    return 0;
+                }));
     }
 
     /**

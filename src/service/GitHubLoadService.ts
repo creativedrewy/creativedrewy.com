@@ -19,11 +19,13 @@ import {DateUtil} from '../util/DateUtil';
  */
 export class GitHubLoadService extends RawGetDataServiceBase {
     private postPrefixToken: string = "";
+    private removePrefix: boolean = true;
 
-    constructor(prefix: string) {
+    constructor(prefix: string, remove: boolean = true) {
         super();
 
         this.postPrefixToken = prefix;
+        this.removePrefix = remove;
 
         gitHubClient = new GitHubApi({});
         gitHubClient.authenticate({
@@ -44,15 +46,8 @@ export class GitHubLoadService extends RawGetDataServiceBase {
                     var uri = url.parse(fullPostFileUrl);
 
                     return this.downloadUrl(uri.host, uri.path);
-                }, (origPost, fileContents) => {
-                    var currentPost = new PostDetails();
-                    currentPost.mainContent = fileContents;
-                    currentPost.title = origPost.description;
-                    currentPost.linkUrl = origPost.html_url;
-                    currentPost.postDate = DateUtil.convertDateToSiteFormat(origPost.created_at);
-                    
-                    return currentPost;
-                })
+                }, 
+                (origPost, fileContents) => this.convertGistDataToPostDetails(origPost, fileContents))
                 .flatMap(partialPost => this.generatePostMarkup(partialPost.mainContent),  
                 (post, htmlResult) => {
                     post.mainContent = htmlResult;
@@ -80,6 +75,23 @@ export class GitHubLoadService extends RawGetDataServiceBase {
                 subscriber.onCompleted();
             });
         });
+    }
+
+    /**
+     * Convert the gist json to a PostDetails object also using the source post contents data
+     */
+    convertGistDataToPostDetails(gistData: any, fileContents: string): PostDetails {
+        var post = new PostDetails();
+        post.mainContent = fileContents;
+        post.linkUrl = gistData.html_url;
+        post.postDate = DateUtil.convertDateToSiteFormat(gistData.created_at);
+
+        var title: string = gistData.description;
+        if (this.removePrefix) 
+            title = title.replace(this.postPrefixToken, "").trim();
+        post.title = title;
+
+        return post;
     }
 
     /**

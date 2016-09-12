@@ -11,7 +11,7 @@ const router = express.Router();
 
 var bloggerLoader:BloggerLoadService = new BloggerLoadService();
 var tumblrLoader:TumblrLoadService = new TumblrLoadService();
-var gitHubLoader:GitHubLoadService = new GitHubLoadService();
+var gitHubLoader:GitHubLoadService = new GitHubLoadService("##");
 
 /**
  * Handle site root

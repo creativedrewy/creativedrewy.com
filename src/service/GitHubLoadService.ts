@@ -18,9 +18,12 @@ import {DateUtil} from '../util/DateUtil';
  * Service to load my specific GH gists and return them as the common data to display in my article list
  */
 export class GitHubLoadService extends RawGetDataServiceBase {
+    private postPrefixToken: string = "";
 
-    constructor() {
+    constructor(prefix: string) {
         super();
+
+        this.postPrefixToken = prefix;
 
         gitHubClient = new GitHubApi({});
         gitHubClient.authenticate({
@@ -68,7 +71,7 @@ export class GitHubLoadService extends RawGetDataServiceBase {
                 var quickHitPosts = new Array<any>();
 
                 for (var gist of res) {
-                    if (gist.description.startsWith("Quick")) {
+                    if (gist.description.startsWith(this.postPrefixToken)) {
                         quickHitPosts.push(gist);
                     }
                 }

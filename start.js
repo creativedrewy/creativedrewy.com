@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * Code from Custom Node.js cartridge for OpenShift
  * https://github.com/icflorescu/openshift-cartridge-nodejs

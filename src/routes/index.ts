@@ -21,14 +21,17 @@ router.get('/', (req, res, next) => {
                  bloggerLoader.loadBloggerData(), 
                  tumblrLoader.loadTumblrData(),
     (githubPosts, bloggerPosts, tumblrPosts) => {
+      //For now the displayed posts are the GH posts followed by the blogger posts
+      var arrangedPosts = githubPosts.concat(bloggerPosts);
+
       return {
-        blogger: githubPosts.concat(bloggerPosts),
+        allPosts: arrangedPosts,
         tumblr: tumblrPosts
       };
     })
     .subscribe((result) => {
       res.render('index', {
-        bloggerPosts: result.blogger,
+        mainPosts: result.allPosts,
         tumbrlPosts: result.tumblr
       });
     })

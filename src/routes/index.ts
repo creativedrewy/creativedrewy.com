@@ -5,26 +5,33 @@ import * as express from 'express';
 import {Observable} from 'rx';
 import {BloggerLoadService} from '../service/BloggerLoadService';
 import {TumblrLoadService} from '../service/TumblrLoadService';
+import {GitHubLoadService} from '../service/GitHubLoadService'
 
 const router = express.Router();
 
 var bloggerLoader:BloggerLoadService = new BloggerLoadService();
 var tumblrLoader:TumblrLoadService = new TumblrLoadService();
+var gitHubLoader:GitHubLoadService = new GitHubLoadService("##");
 
 /**
  * Handle site root
  */
 router.get('/', (req, res, next) => {
-  Observable.zip(bloggerLoader.loadBloggerData(), tumblrLoader.loadTumblrData(),
-    (bloggerPosts, tumblrPosts) => {
+  Observable.zip(gitHubLoader.loadQuickHitPosts(), 
+                 bloggerLoader.loadBloggerData(), 
+                 tumblrLoader.loadTumblrData(),
+    (githubPosts, bloggerPosts, tumblrPosts) => {
+      //For now the displayed posts are the GH posts followed by the blogger posts
+      var arrangedPosts = githubPosts.concat(bloggerPosts);
+
       return {
-        blogger: bloggerPosts,
+        allPosts: arrangedPosts,
         tumblr: tumblrPosts
       };
     })
     .subscribe((result) => {
       res.render('index', {
-        bloggerPosts: result.blogger,
+        mainPosts: result.allPosts,
         tumbrlPosts: result.tumblr
       });
     })

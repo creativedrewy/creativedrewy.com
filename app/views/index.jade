@@ -3,9 +3,9 @@ extends layout
 block content
   .row
     .span8
-      h2.blog-heading From the blog:
+      h2.blog-heading Sometimes I write stuff:
       
-      each post in bloggerPosts
+      each post in mainPosts
         h3.post-title= post.title
         .post-info
           h4.published-info= post.postDate
@@ -14,11 +14,11 @@ block content
             div !{post.mainContent}
             
             p.post-footer
-              | Read the original and comment over on 
-              a(target='_blank', href=post.linkUrl) blogger.
+              | Read the original and comment 
+              a(target='_blank', href=post.linkUrl) here.
             
     .span4
-      h2.blog-heading Tumblr is for linking:
+      h2.blog-heading Snazzy dev links:
       
       each post in tumbrlPosts
         .tumblr-link

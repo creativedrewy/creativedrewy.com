@@ -92,14 +92,24 @@ h3, h4 {
     margin-bottom: 45px;
 }
 
+.tr-caption-container {
+    margin-bottom: 12px;
+}
+
 .post-main-content {
     color: #555;
     background-color: #fff;
     display: none;
 }
 
-.tr-caption-container {
-    margin-bottom: 12px;
+.post-main-content p, 
+.post-main-content h4,
+.post-main-content .highlight {
+    margin-bottom: 20px;
+}
+
+.post-main-content h4 + br {
+    display: none;
 }
 
 .post-main-content h3 {
@@ -109,7 +119,19 @@ h3, h4 {
 
 .post-main-content ul, .post-main-content ol {
     margin-top: 7px;
-    margin-bottom: 7px;
+    margin-bottom: 20px;
+}
+
+.pl-ent {
+    color: #5100CF;
+}
+
+.pl-e {
+    color: #005FFF;
+}
+
+.pl-s {
+    color: #A31515;
 }
 
 .post-footer {

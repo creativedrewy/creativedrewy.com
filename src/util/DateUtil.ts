@@ -6,9 +6,9 @@
 export class DateUtil {
     
     /**
-     * Convert the blogger publish date to a readable string
+     * Convert a UTC date string to the format used when displaying posts on my site 
      */
-    static bloggerDateReadable(sourceDate: string):string {
+    static convertDateToSiteFormat(sourceDate: string):string {
         var dateSubstring:string = sourceDate.substring(0, sourceDate.indexOf("T"));
         var dateParts:string[] = dateSubstring.split('-');
         

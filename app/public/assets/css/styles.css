@@ -102,6 +102,10 @@ h3, h4 {
     display: none;
 }
 
+.post-main-content-show {
+    display: block;
+}
+
 .post-main-content p, 
 .post-main-content h4,
 .post-main-content .highlight {

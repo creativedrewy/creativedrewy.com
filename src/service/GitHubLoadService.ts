@@ -91,7 +91,10 @@ export class GitHubLoadService extends RawGetDataServiceBase {
             title = title.replace(this.postPrefixToken, "").trim();
         post.title = title;
 
-        post.permaLink = "youWillPutSomethingHere";
+        post.permaLink = title.toLowerCase()
+                            .replace(":", "")   //This may need to update to url-ify-ish functionality
+                            .split(" ", 9)
+                            .join("-") + "-gh-" + gistData.id;
 
         return post;
     }

@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .row
+    .span8      
+      h3.post-title= articlePost.title
+      .post-info
+        h4.published-info= articlePost.postDate
+        .post-main-content-show
+          div !{articlePost.mainContent}
+          
+          p.post-footer
+            | Read the original and comment 
+            a(target='_blank', href=articlePost.linkUrl) here.
+            
+    //- .span4
+    //-   h2.blog-heading Snazzy dev links:
+      
+    //-   each post in tumbrlPosts
+    //-     .tumblr-link
+    //-       h4= post.title
+    //-       a(href=post.linkUrl, target='_blank')= post.linkUrl
+    //-       .tumblr-description
+    //-         p !{post.mainContent}

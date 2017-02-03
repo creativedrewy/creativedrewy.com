@@ -1,4 +1,5 @@
 'use strict';
+import { PostDetails } from '../model/PostDetails';
 
 import * as fs from 'fs';
 import * as express from 'express';
@@ -35,6 +36,12 @@ router.get('/', (req, res, next) => {
         tumbrlPosts: result.tumblr
       });
     })
+});
+
+router.get('/article/:permalink', (req, res, next) => {
+  res.render('article', { 
+    articlePost: new PostDetails()
+   });
 });
 
 /**

@@ -9,7 +9,7 @@ block content
         h3.post-title= post.title
         .post-info
           h4.published-info= post.postDate
-          a.btn.btn-info.btn-large.read-it-button(href=post.linkUrl, target='_blank') Read It!
+          a.btn.btn-info.btn-large.read-it-button(href=post.permaLink, target='_blank') Read It!
           .post-main-content
             div !{post.mainContent}
             

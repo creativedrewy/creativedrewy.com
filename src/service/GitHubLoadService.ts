@@ -91,6 +91,8 @@ export class GitHubLoadService extends RawGetDataServiceBase {
             title = title.replace(this.postPrefixToken, "").trim();
         post.title = title;
 
+        post.permaLink = "youWillPutSomethingHere";
+
         return post;
     }
 

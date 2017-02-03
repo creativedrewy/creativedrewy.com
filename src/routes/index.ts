@@ -40,25 +40,17 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/article/:permalink', (req, res, next) => {
-  var tempPost = new PostDetails();
-
-  var perma: string = req.params['permalink'];
-  var urlParts = perma.split("-");
+  var urlParts = req.params['permalink'].split("-");
   var articleSource = urlParts[urlParts.length - 2];
   var articleId = urlParts[urlParts.length - 1];
 
-  tempPost.title = articleId;
-
   gitHubLoader.loadPostById(articleId)
-              .subscribe((result) => {
+              .subscribe(result => {
                 res.render('article', { 
                   articlePost: result
                 });
-              }, (err) => {
-                tempPost.title = err
-                res.render('article', { 
-                  articlePost: tempPost
-                });
+              }, err => {
+                res.redirect("/");
               })
 });
 

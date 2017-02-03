@@ -38,21 +38,8 @@ export class GitHubLoadService extends RawGetDataServiceBase {
      * Return my "Quick Hit" posts in the to display on my site
      */
     loadQuickHitPosts():Observable<Array<PostDetails>> {
-        return this.generatePostsRxList()
-                .flatMap(listOfPosts => Observable.from(listOfPosts))
-                .flatMap(post => {
-                    var firstFileKey = Object.keys(post.files)[0];
-                    var fullPostFileUrl = post.files[firstFileKey]['raw_url'];
-                    var uri = url.parse(fullPostFileUrl);
-
-                    return this.downloadUrl(uri.host, uri.path);
-                }, 
-                (origPost, fileContents) => this.convertGistDataToPostDetails(origPost, fileContents))
-                .flatMap(partialPost => this.generatePostMarkup(partialPost.mainContent),  
-                (post, htmlResult) => {
-                    post.mainContent = htmlResult;
-                    return post;
-                })
+        return this.convertPostAndGetArticle(this.generatePostsRxList()
+                .flatMap(listOfPosts => Observable.from(listOfPosts)))
                 .toArray()
                 .map(items => items.sort((left, right) => new Date(left.postDate) >= new Date(right.postDate) ? 0 : 1));
     }
@@ -75,6 +62,44 @@ export class GitHubLoadService extends RawGetDataServiceBase {
                 subscriber.onCompleted();
             });
         });
+    }
+
+    /**
+     * 
+     */
+    loadPostById(id: string): Observable<PostDetails> {
+        return this.convertPostAndGetArticle(this.getGistById(id));
+    }
+
+    /**
+     * 
+     */
+    getGistById(postId: string): Observable<any> {
+        return Observable.create<PostDetails>((subscriber) => {
+            gitHubClient.gists.get({ id: postId }, (err, res) => {
+                subscriber.onNext(res);
+                subscriber.onCompleted();
+            });
+        });
+    }
+
+    /**
+     * 
+     */
+    convertPostAndGetArticle(post: Observable<any>): Observable<PostDetails> {
+        return post.flatMap(post => {
+                    var firstFileKey = Object.keys(post.files)[0];
+                    var fullPostFileUrl = post.files[firstFileKey]['raw_url'];
+                    var uri = url.parse(fullPostFileUrl);
+
+                    return this.downloadUrl(uri.host, uri.path);
+                }, 
+                (origPost, fileContents) => this.convertGistDataToPostDetails(origPost, fileContents))
+                .flatMap(partialPost => this.generatePostMarkup(partialPost.mainContent),  
+                (post, htmlResult) => {
+                    post.mainContent = htmlResult;
+                    return post;
+                });
     }
 
     /**

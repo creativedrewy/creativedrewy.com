@@ -1,4 +1,5 @@
 'use strict';
+import { Z_ERRNO } from 'zlib';
 import { PostDetails } from '../model/PostDetails';
 
 import * as fs from 'fs';
@@ -39,9 +40,26 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/article/:permalink', (req, res, next) => {
-  res.render('article', { 
-    articlePost: new PostDetails()
-   });
+  var tempPost = new PostDetails();
+
+  var perma: string = req.params['permalink'];
+  var urlParts = perma.split("-");
+  var articleSource = urlParts[urlParts.length - 2];
+  var articleId = urlParts[urlParts.length - 1];
+
+  tempPost.title = articleId;
+
+  gitHubLoader.loadPostById(articleId)
+              .subscribe((result) => {
+                res.render('article', { 
+                  articlePost: result
+                });
+              }, (err) => {
+                tempPost.title = err
+                res.render('article', { 
+                  articlePost: tempPost
+                });
+              })
 });
 
 /**

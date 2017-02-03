@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .row
+    .span8
+      h3.post-title.article= articlePost.title
+      .post-info
+        h4.published-info= articlePost.postDate
+        .post-main-content.article
+          div !{articlePost.mainContent}
+          
+          p.post-footer
+            | Read the original and comment 
+            a(target='_blank', href=articlePost.linkUrl) here.
+    
+    include devlinks.jade

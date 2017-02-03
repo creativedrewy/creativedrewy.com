@@ -13,6 +13,7 @@ import {Observable} from 'rx';
 import {PostDetails} from '../model/PostDetails';
 import {RawGetDataServiceBase} from './RawGetDataServiceBase';
 import {DateUtil} from '../util/DateUtil';
+import {StringUtil} from '../util/StringUtil';
 
 /**
  * Service to load my specific GH gists and return them as the common data to display in my article list
@@ -38,21 +39,8 @@ export class GitHubLoadService extends RawGetDataServiceBase {
      * Return my "Quick Hit" posts in the to display on my site
      */
     loadQuickHitPosts():Observable<Array<PostDetails>> {
-        return this.generatePostsRxList()
-                .flatMap(listOfPosts => Observable.from(listOfPosts))
-                .flatMap(post => {
-                    var firstFileKey = Object.keys(post.files)[0];
-                    var fullPostFileUrl = post.files[firstFileKey]['raw_url'];
-                    var uri = url.parse(fullPostFileUrl);
-
-                    return this.downloadUrl(uri.host, uri.path);
-                }, 
-                (origPost, fileContents) => this.convertGistDataToPostDetails(origPost, fileContents))
-                .flatMap(partialPost => this.generatePostMarkup(partialPost.mainContent),  
-                (post, htmlResult) => {
-                    post.mainContent = htmlResult;
-                    return post;
-                })
+        return this.convertPostAndGetArticle(this.generatePostsRxList()
+                .flatMap(listOfPosts => Observable.from(listOfPosts)))
                 .toArray()
                 .map(items => items.sort((left, right) => new Date(left.postDate) >= new Date(right.postDate) ? 0 : 1));
     }
@@ -78,6 +66,44 @@ export class GitHubLoadService extends RawGetDataServiceBase {
     }
 
     /**
+     * Load a Gist post by its individual id
+     */
+    loadPostById(id: string): Observable<PostDetails> {
+        return this.convertPostAndGetArticle(this.getGistById(id));
+    }
+
+    /**
+     * Wrap the GH client lib, getting the Gist and returning as rx
+     */
+    getGistById(postId: string): Observable<any> {
+        return Observable.create<PostDetails>((subscriber) => {
+            gitHubClient.gists.get({ id: postId }, (err, res) => {
+                subscriber.onNext(res);
+                subscriber.onCompleted();
+            });
+        });
+    }
+
+    /**
+     * Convert raw GH gist to a PostDetails object and download the markdown article contents
+     */
+    convertPostAndGetArticle(post: Observable<any>): Observable<PostDetails> {
+        return post.flatMap(post => {
+                    var firstFileKey = Object.keys(post.files)[0];
+                    var fullPostFileUrl = post.files[firstFileKey]['raw_url'];
+                    var uri = url.parse(fullPostFileUrl);
+
+                    return this.downloadUrl(uri.host, uri.path);
+                }, 
+                (origPost, fileContents) => this.convertGistDataToPostDetails(origPost, fileContents))
+                .flatMap(partialPost => this.generatePostMarkup(partialPost.mainContent),  
+                (post, htmlResult) => {
+                    post.mainContent = htmlResult;
+                    return post;
+                });
+    }
+
+    /**
      * Convert the gist json to a PostDetails object also using the source post contents data
      */
     convertGistDataToPostDetails(gistData: any, fileContents: string): PostDetails {
@@ -90,6 +116,7 @@ export class GitHubLoadService extends RawGetDataServiceBase {
         if (this.removePrefix) 
             title = title.replace(this.postPrefixToken, "").trim();
         post.title = title;
+        post.permaLink = StringUtil.genPermalink(title, "gh", gistData.id)
 
         return post;
     }

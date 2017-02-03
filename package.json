@@ -20,7 +20,8 @@
     "rx": "^4.1.0",
     "serve-favicon": "^2.3.0",
     "tumblr.js": "^1.0.0",
-    "typings": "^1.0.4"
+    "typings": "^1.0.4",
+    "urlify": "^0.3.6"
   },
   "devDependencies": {
     "grunt-express-server": "^0.5.3"

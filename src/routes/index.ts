@@ -40,18 +40,18 @@ router.get('/', (req, res, next) => {
 });
 
 /**
- * Load an article as well as the sidebar content
+ * Load an article from the relevant source as well as the sidebar content
  */
 router.get('/article/:permalink', (req, res, next) => {
   var urlParts = req.params['permalink'].split("-");
-  var articleSource = urlParts[urlParts.length - 2];
-  var articleId = urlParts[urlParts.length - 1];
+  var articleSource = urlParts[urlParts.length - 2];  //Get the "source" value
+  var articleId = urlParts[urlParts.length - 1];  //Get the article id
 
-  var postRx = Observable.just(new PostDetails());
+  var postRx;
   if (articleSource == "gh") {
     postRx = gitHubLoader.loadPostById(articleId);
   } else {
-    //TODO: Load in Blogger post here
+    postRx = bloggerLoader.loadPostById(articleId);
   }
 
   Observable.zip(postRx, tumblrLoader.loadTumblrData(),

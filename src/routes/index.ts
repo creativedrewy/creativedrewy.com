@@ -47,7 +47,14 @@ router.get('/article/:permalink', (req, res, next) => {
   var articleSource = urlParts[urlParts.length - 2];
   var articleId = urlParts[urlParts.length - 1];
 
-  Observable.zip(gitHubLoader.loadPostById(articleId), tumblrLoader.loadTumblrData(),
+  var postRx = Observable.just(new PostDetails());
+  if (articleSource == "gh") {
+    postRx = gitHubLoader.loadPostById(articleId);
+  } else {
+    //TODO: Load in Blogger post here
+  }
+
+  Observable.zip(postRx, tumblrLoader.loadTumblrData(),
     (post, tumblrPosts) => {
       return {
         article: post,

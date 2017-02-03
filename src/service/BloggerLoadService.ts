@@ -1,4 +1,5 @@
 'use strict'
+import { StringUtil } from '../util/StringUtil';
 
 var env = require('node-env-file');
 env('.auth');
@@ -36,6 +37,7 @@ export class BloggerLoadService extends RawGetDataServiceBase {
             details.postDate = DateUtil.convertDateToSiteFormat(item.published);
             details.linkUrl = item.url;
             details.mainContent = item.content;
+            details.permaLink = StringUtil.genPermalink(item.title, "bl", item.id);
             
             posts.push(details);
         }

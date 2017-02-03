@@ -13,6 +13,7 @@ import {Observable} from 'rx';
 import {PostDetails} from '../model/PostDetails';
 import {RawGetDataServiceBase} from './RawGetDataServiceBase';
 import {DateUtil} from '../util/DateUtil';
+import {StringUtil} from '../util/StringUtil';
 
 /**
  * Service to load my specific GH gists and return them as the common data to display in my article list
@@ -115,11 +116,7 @@ export class GitHubLoadService extends RawGetDataServiceBase {
         if (this.removePrefix) 
             title = title.replace(this.postPrefixToken, "").trim();
         post.title = title;
-
-        post.permaLink = title.toLowerCase()
-                            .replace(":", "")   //This may need to update to url-ify-ish functionality
-                            .split(" ", 9)
-                            .join("-") + "-gh-" + gistData.id;
+        post.permaLink = StringUtil.genPermalink(title, "gh", gistData.id)
 
         return post;
     }

@@ -12,13 +12,5 @@ block content
           p.post-footer
             | Read the original and comment 
             a(target='_blank', href=articlePost.linkUrl) here.
-            
-    //- .span4
-    //-   h2.blog-heading Snazzy dev links:
-      
-    //-   each post in tumbrlPosts
-    //-     .tumblr-link
-    //-       h4= post.title
-    //-       a(href=post.linkUrl, target='_blank')= post.linkUrl
-    //-       .tumblr-description
-    //-         p !{post.mainContent}
+    
+    include devlinks.jade

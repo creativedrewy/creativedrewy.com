@@ -65,14 +65,14 @@ export class GitHubLoadService extends RawGetDataServiceBase {
     }
 
     /**
-     * 
+     * Load a Gist post by its individual id
      */
     loadPostById(id: string): Observable<PostDetails> {
         return this.convertPostAndGetArticle(this.getGistById(id));
     }
 
     /**
-     * 
+     * Wrap the GH client lib, getting the Gist and returning as rx
      */
     getGistById(postId: string): Observable<any> {
         return Observable.create<PostDetails>((subscriber) => {
@@ -84,7 +84,7 @@ export class GitHubLoadService extends RawGetDataServiceBase {
     }
 
     /**
-     * 
+     * Convert raw GH gist to a PostDetails object and download the markdown article contents
      */
     convertPostAndGetArticle(post: Observable<any>): Observable<PostDetails> {
         return post.flatMap(post => {

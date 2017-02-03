@@ -39,19 +39,27 @@ router.get('/', (req, res, next) => {
     })
 });
 
+/**
+ * Load an article as well as the sidebar content
+ */
 router.get('/article/:permalink', (req, res, next) => {
   var urlParts = req.params['permalink'].split("-");
   var articleSource = urlParts[urlParts.length - 2];
   var articleId = urlParts[urlParts.length - 1];
 
-  gitHubLoader.loadPostById(articleId)
-              .subscribe(result => {
-                res.render('article', { 
-                  articlePost: result
-                });
-              }, err => {
-                res.redirect("/");
-              })
+  Observable.zip(gitHubLoader.loadPostById(articleId), tumblrLoader.loadTumblrData(),
+    (post, tumblrPosts) => {
+      return {
+        article: post,
+        tumblr: tumblrPosts
+      };
+    }).subscribe(result => {
+      res.render('article', { 
+        articlePost: result.article,
+        tumbrlPosts: result.tumblr
+      });
+    }, 
+    err => res.redirect("/"))
 });
 
 /**

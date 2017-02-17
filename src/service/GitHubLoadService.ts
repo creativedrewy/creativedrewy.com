@@ -116,7 +116,8 @@ export class GitHubLoadService extends RawGetDataServiceBase {
         if (this.removePrefix) 
             title = title.replace(this.postPrefixToken, "").trim();
         post.title = title;
-        post.permaLink = StringUtil.genPermalink(title, "gh", gistData.id)
+        post.permaLink = StringUtil.genPermalink(title, "gh", gistData.id);
+        post.sourceDate = new Date(gistData.created_at);
 
         return post;
     }

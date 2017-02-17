@@ -23,8 +23,11 @@ router.get('/', (req, res, next) => {
                  bloggerLoader.loadBloggerData(), 
                  tumblrLoader.loadTumblrData(),
     (githubPosts, bloggerPosts, tumblrPosts) => {
-      //For now the displayed posts are the GH posts followed by the blogger posts
+      //Get all the posts and then sort them by date
       var arrangedPosts = githubPosts.concat(bloggerPosts);
+      arrangedPosts = arrangedPosts.sort((left, right) => {
+        return right.sourceDate.getTime() > left.sourceDate.getTime() ? 1 : -1;
+      });
 
       return {
         allPosts: arrangedPosts,

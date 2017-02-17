@@ -6,4 +6,5 @@ export class PostDetails {
     mainContent: string;
     linkUrl: string;
     permaLink: string;
+    sourceDate: Date;
 }

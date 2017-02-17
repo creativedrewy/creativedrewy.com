@@ -59,6 +59,7 @@ export class BloggerLoadService extends RawGetDataServiceBase {
         details.linkUrl = item.url;
         details.mainContent = item.content;
         details.permaLink = StringUtil.genPermalink(item.title, "bl", item.id);
+        details.sourceDate = new Date(item.published);
         
         return details;
     }

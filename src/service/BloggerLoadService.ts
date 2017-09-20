@@ -1,14 +1,12 @@
 'use strict'
-import { StringUtil } from '../util/StringUtil';
-
-var env = require('node-env-file');
-env('.auth');
 
 import * as https from 'https';
-import {Observable} from 'rx';   //http://stackoverflow.com/questions/35919693/typescript-cannot-find-name-ipromise-in-rxjs-definition
-import {PostDetails} from '../model/PostDetails';
-import {DateUtil} from '../util/DateUtil';
-import {RawGetDataServiceBase} from './RawGetDataServiceBase';
+import { Observable } from 'rx';   //http://stackoverflow.com/questions/35919693/typescript-cannot-find-name-ipromise-in-rxjs-definition
+import { PostDetails } from '../model/PostDetails';
+import { DateUtil } from '../util/DateUtil';
+import { RawGetDataServiceBase } from './RawGetDataServiceBase';
+import { StringUtil } from '../util/StringUtil';
+import { EnvironmentVarsService } from './EnvironmentVarsService';
 
 /**
  * Encapsulates functionality with the Blogger API
@@ -18,7 +16,8 @@ export class BloggerLoadService extends RawGetDataServiceBase {
     postsEndpoint: string = "/blogger/v3/blogs/6463744994222299033/posts"
         
     appendApiKey(endpoint: string): string {
-        return endpoint + "?key=" + process.env.BLOGGER;
+        var env = new EnvironmentVarsService();
+        return endpoint + "?key=" + env.getEnvVar("BLOGGER");
     }
 
     /**

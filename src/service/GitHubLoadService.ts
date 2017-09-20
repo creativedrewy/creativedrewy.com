@@ -2,18 +2,16 @@
 
 var url = require('url');
 
-var env = require('node-env-file');
-env('.auth');
-
 var GitHubApi = require("github");
 var gitHubClient;
 
 import * as https from 'https';
-import {Observable} from 'rx';
-import {PostDetails} from '../model/PostDetails';
-import {RawGetDataServiceBase} from './RawGetDataServiceBase';
-import {DateUtil} from '../util/DateUtil';
-import {StringUtil} from '../util/StringUtil';
+import { Observable } from 'rx';
+import { PostDetails } from '../model/PostDetails';
+import { RawGetDataServiceBase } from './RawGetDataServiceBase';
+import { DateUtil } from '../util/DateUtil';
+import { StringUtil } from '../util/StringUtil';
+import { EnvironmentVarsService } from './EnvironmentVarsService';
 
 /**
  * Service to load my specific GH gists and return them as the common data to display in my article list
@@ -28,10 +26,11 @@ export class GitHubLoadService extends RawGetDataServiceBase {
         this.postPrefixToken = prefix;
         this.removePrefix = remove;
 
+        var env = new EnvironmentVarsService();
         gitHubClient = new GitHubApi({});
         gitHubClient.authenticate({
             type: "oauth",
-            token: process.env.GITHUB_TOKEN
+            token: env.getEnvVar("GITHUB_TOKEN")
         });
     }
 

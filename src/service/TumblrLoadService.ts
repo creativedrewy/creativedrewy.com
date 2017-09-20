@@ -1,15 +1,13 @@
 'use strict'
 
-var env = require('node-env-file');
-env('.auth');
-
 var tumblr = require('tumblr.js');
 var tumblrClient;
 
 const postCount:number = 10;    //Change this to set how many tumblr link posts show in the layout
 
-import {Observable} from 'rx';
-import {PostDetails} from '../model/PostDetails';
+import { Observable } from 'rx';
+import { PostDetails } from '../model/PostDetails';
+import { EnvironmentVarsService } from './EnvironmentVarsService';
 
 /**
  * Encapsulates functionality with the tumblr API
@@ -20,11 +18,13 @@ export class TumblrLoadService {
      * Constructor
      */
     constructor() {
+        var env = new EnvironmentVarsService();
+
         tumblrClient = tumblr.createClient({
-            consumer_key: process.env.TUMBLR_CONSUMER_KEY,
-            consumer_secret: process.env.TUMBLR_CONSUMER_SECRET,
-            token: process.env.TUMBLR_TOKEN,
-            token_secret: process.env.TUMBLR_TOKEN_SECRET
+            consumer_key: env.getEnvVar("TUMBLR_CONSUMER_KEY"),
+            consumer_secret: env.getEnvVar("TUMBLR_CONSUMER_SECRET"),
+            token: env.getEnvVar("TUMBLR_TOKEN"),
+            token_secret: env.getEnvVar("TUMBLR_TOKEN_SECRET")
         });
     }
     

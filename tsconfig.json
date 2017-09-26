@@ -4,12 +4,12 @@
       "target": "es5",
       "noImplicitAny": false,
       "moduleResolution": "node",
-      "sourceMap": true,
+      "sourceMap": false,
       "outDir": "app/bin/",
       "baseUrl": ".",
       "lib": [
         "es5",
-        "es2015.promise"  
+        "es2015.promise"
       ],
       "paths": {
           "*": [

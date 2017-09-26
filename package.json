@@ -3,7 +3,7 @@
   "author": "Andrew Watson",
   "version": "2.0.0",
   "scripts": {
-    "start": "node app/bin/site.js"
+    "start": "grunt deploy"
   },
   "dependencies": {
     "body-parser": "^1.14.2",

@@ -1,15 +1,23 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "removeComments": true,
-    "sourceMap": false,
-    "outDir": "app/bin/",
-    "rootDir": "src"
+      "module": "commonjs",
+      "target": "es5",
+      "noImplicitAny": false,
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "outDir": "app/bin/",
+      "baseUrl": ".",
+      "lib": [
+        "es5",
+        "es2015.promise"  
+      ],
+      "paths": {
+          "*": [
+              "node_modules/*"
+          ]
+      }
   },
-  "exclude":[
-    "typings/main",
-    "typings/main.d.ts",
-    "node_modules"
+  "include": [
+      "src/**/*"
   ]
 }

@@ -5,12 +5,14 @@ import * as debugModule from 'debug';
 import * as http from 'http';
 
 const debug = debugModule('express:server');
-const port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+//const port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+const port = 3000;
 
 app.set('port', port);
 
 var server = http.createServer(app);
-server.listen(port, process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1', () => {
+//server.listen(port, process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1', () => {
+server.listen(port, '127.0.0.1', () => {
   console.log(":: Running {c:d} website :: ");
 });
 

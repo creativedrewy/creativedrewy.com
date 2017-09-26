@@ -4,7 +4,6 @@ import * as express from 'express';
 import * as path from 'path';
 import * as favicon from 'serve-favicon';
 import * as logger from 'morgan';
-import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import index from './routes/index';
 
@@ -19,7 +18,7 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', index);
@@ -35,16 +34,16 @@ app.use((req: express.Request, res: express.Response, next) => {
 
 //development error handler
 //will print stacktrace
-if (process.env.NODE_ENV === 'development') {
-  app.use((err: Error, req, res, next) => {
-    res.status(err['status'] || 500);
-    res.render('error', {
-      title: 'error',
-      message: err.message,
-      error: err
-    });
-  });    
-}
+// if (process.env.NODE_ENV === 'development') {
+//   app.use((err: Error, req, res, next) => {
+//     res.status(err['status'] || 500);
+//     res.render('error', {
+//       title: 'error',
+//       message: err.message,
+//       error: err
+//     });
+//   });    
+// }
 
 //production error handler; no stacktrace leaked to user
 app.use((err: Error, req, res, next) => {

@@ -8,7 +8,7 @@ import * as http from 'http';
 
 env(".auth");
 const debug = debugModule('express:server');
-const port = parseInt(process.env.PORT);
+const port = parseInt(process.env["PORT"]);
 
 app.set('port', port);
 

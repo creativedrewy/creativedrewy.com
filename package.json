@@ -7,16 +7,6 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@types/body-parser": "^1.16.5",
-    "@types/debug": "0.0.30",
-    "@types/express": "^4.0.37",
-    "@types/express-serve-static-core": "^4.0.53",
-    "@types/mime": "^2.0.0",
-    "@types/morgan": "^1.7.33",
-    "@types/node": "^8.0.31",
-    "@types/rx": "^4.1.1",
-    "@types/serve-favicon": "^2.2.29",
-    "@types/serve-static": "^1.7.32",
     "body-parser": "^1.14.2",
     "debug": "^2.2.0",
     "express": "^4.13.3",
@@ -27,11 +17,19 @@
     "rx": "^4.1.0",
     "serve-favicon": "^2.3.0",
     "tumblr.js": "^1.0.0",
-    "typescript": "^2.5.2",
-    "typings": "^1.0.4",
     "urlify": "^0.3.6"
   },
   "devDependencies": {
-    
+    "@types/body-parser": "^1.16.5",
+    "@types/debug": "0.0.30",
+    "@types/express": "^4.0.37",
+    "@types/express-serve-static-core": "^4.0.53",
+    "@types/mime": "^2.0.0",
+    "@types/morgan": "^1.7.33",
+    "@types/node": "^8.0.31",
+    "@types/rx": "^4.1.1",
+    "@types/serve-favicon": "^2.2.29",
+    "@types/serve-static": "^1.7.32",
+    "typescript": "^2.5.2"
   }
 }

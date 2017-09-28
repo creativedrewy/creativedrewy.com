@@ -1,19 +1,20 @@
 'use strict';
 
+var env = require('node-env-file');
+
 import app from './app';
 import * as debugModule from 'debug';
 import * as http from 'http';
 
+env(".auth");
 const debug = debugModule('express:server');
-//const port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
-const port = 3000;
+const port = parseInt(process.env.PORT);
 
 app.set('port', port);
 
 var server = http.createServer(app);
-//server.listen(port, process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1', () => {
 server.listen(port, '127.0.0.1', () => {
-  console.log(":: Running {c:d} website :: ");
+  console.log(":: Running {c:d} website || Port: " + port + " ::");
 });
 
 server.on('error', onError);

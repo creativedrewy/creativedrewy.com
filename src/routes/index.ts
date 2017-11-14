@@ -76,7 +76,7 @@ router.get('/article/:permalink', (req, res, next) => {
  * "Dynamic" bio js that can be embedded externally
  */
 router.get('/bio.js', (req, res, next) => {
-  res.send("document.write('Android developer and all-around nerd in the San Francisco Bay Area. If it\\'s cool tech, I'm probably interested.');");
+  res.send("document.write('Android developer and all-around nerd in the San Francisco Bay Area. If it\\'s cool tech, I\\'m probably interested.');");
 })
 
 /**

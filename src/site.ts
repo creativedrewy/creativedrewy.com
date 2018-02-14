@@ -13,7 +13,7 @@ const port = parseInt(process.env["PORT"]);
 app.set('port', port);
 
 var server = http.createServer(app);
-server.listen(port, '127.0.0.1', () => {
+server.listen(port, process.env["IP"], () => {
   console.log(":: Running {c:d} website || Port: " + port + " ::");
 });
 
